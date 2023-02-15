@@ -10,3 +10,6 @@
   - [Parcel & Eslint](week01/parcel-and-eslint.md)
 - [2주차](week02/main.md)
   - [jsx](week02/jsx.md)
+- [3주차](week03/main.md)
+  - [react-component](week03/react-component.md)
+  - [react-state](week03/react-state.md)
