@@ -5,11 +5,35 @@
 ### REST란 무엇인가
 
 - Representational State Transfer의 약자
-- REST의 조건들
+- REST의 특징
 
   1. Client-server
+
+     - 자원이 있는 쪽이 서버, 요청하는 쪽이 클라이언트
+     - REST Server: API를 제공하고 비즈니스 로직 처리 및 저장을 담당
+     - Client: 사용자 인증, context(세션, 로그인 정보) 등을 직접 관리하고 책임진다.
+
   2. Stateless
+
+     - HTTP 프로토콜은 Stateless Protocol 이므로 REST 역시 무상태성을 갖는다.
+     - client의 context를 server에 저장하지 않는다.
+        - 즉, 세션과 쿠키와 같은 context 정보를 신경쓰지 않아도 되므로 구현이 단순해진다.
+
+     - Server는 각각의 요청을 완전히 별개의 것으로 인식하고 처리한다.
+     - 각 API 서버는 Client의 요청만을 단순 처리한다.
+     - 즉, 이전 요청이 다음 요청의 처리에 연관되어서는 안된다.
+     - 물론 이전 요청이 DB를 수정하여 DB에 의해 바뀌는 것은 허용한다.
+     - Server의 처리 방식에 일관성을 부여하고 부담이 줄어들며, 서비스의 자유도가 높아진다.
+
   3. Cache
+
+     - 웹 표준 HTTP 프로토콜을 그대로 사용하므로 웹에서 사용하는 기존의 인프라를 그대로 활용할 수 있다.
+        - 즉, HTTP가 가진 가장 강력한 특징 중 하나인 캐싱 기능을 적용할 수 있다.
+        - HTTP 프로토콜 표준에서 사용하는 Last-Modified 태스나 E-Tag를 이용하면 캐싱 구현이 가능하다.
+     - 대량의 요청을 효율적으로 처리하기 위해 캐시가 요구된다.
+     - 캐시 사용을 통해 응답시간이 빨리지고 REST Server 트랜잭션이 발생하지 않기 때문에 전체
+     응답시간, 성능, 서버의 자원 이용률을 향상시킬 수 있다.
+
   4. Uniform Interface
 
      - 4가지 제약 조건이 있다.
@@ -34,7 +58,14 @@
           더 알아보고 정리하자
 
   5. Layered System
+
+     - Client는 REST API Server만 호출한다
+     - REST Server는 다중 계층으로 구성될 수 있다.
+     - Proxy, 게이트웨어 같은 네트워크 기반의 중간 매체를 사용할 수 있다.
+
   6. Code-On-Demand
+     - Server로부터 스크립트를 받아서 Client에서 실행한다.
+     - 반드시 충족할 필요는 없다.
 
 ### GraphQL은 왜 등장했는가?
 
@@ -137,6 +168,7 @@ HTTP Method(post, get, put, delete)를 통해 해당자원에 대한 CRUD Operat
 그래서 우리가 흔히 쓰는 방식은 주로 REST 스타일을 어느 정도 준수하는 HTTP API를 사용한다 라는 말이 좀 더 명확한 것 같다.
 
 또 RESTful 하다라는 것은 REST API의 설계의도를 명확하게 지켜주는 것이다.
+REST의 특징을 모두 이해해서 다시 작성하면 좋을 것 같다.
 
 여기까지가 내가 이해한 내용이다. 추후에 더 정리하면서 이해가 되는대로 재정리가 필요하다.
 
@@ -311,7 +343,7 @@ React에서도 컴포넌트 규모가 커지면 너무 많은 기능을 감당�
 ### React component 와 props
 
 React Component 는 다음과 같이 작성한다
-함수에 이름 첫글자에 대문자를 사용하고 html을 리턴한다. 
+함수에 이름 첫글자에 대문자를 사용하고 html을 리턴한다.
 es6의 클래스를 사용해서 작성할 수도 있으나 현재는 주로 함수형으로 작성한다.
 
 ```js
@@ -321,6 +353,7 @@ function Welcome(props) {
 ```
 
 컴포넌트는 합성이 가능하다.
+
 ```js
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
